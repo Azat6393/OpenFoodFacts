@@ -97,4 +97,11 @@ dependencies {
 
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02"
     kapt "androidx.hilt:hilt-compiler:1.0.0-alpha02"
+
+    //Scanner Barcode and QR
+    implementation "com.journeyapps:zxing-android-embedded:3.4.0"
+
+    //View Binding
+    implementation 'com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.4.4'
+
 }
