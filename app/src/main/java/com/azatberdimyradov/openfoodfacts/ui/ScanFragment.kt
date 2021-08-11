@@ -13,6 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenStarted
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.azatberdimyradov.openfoodfacts.R
+import com.azatberdimyradov.openfoodfacts.data.local.ProductItem
+import com.azatberdimyradov.openfoodfacts.data.remote.models.ProductResponse
 import com.azatberdimyradov.openfoodfacts.databinding.FragmentScanBinding
 import com.azatberdimyradov.openfoodfacts.utils.CaptureAct
 import com.azatberdimyradov.openfoodfacts.utils.Resource
@@ -43,7 +45,7 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
             }
             btFind.setOnClickListener {
                 val input = tilBarcode.editText?.text.toString()
-                if (input.isNotEmpty()){
+                if (input.isNotEmpty()) {
                     viewModel.getProductByBarcode(input)
                 }
             }
@@ -51,25 +53,40 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
         setHasOptionsMenu(true)
     }
 
-    private fun subscribeToObserves(){
+    private fun subscribeToObserves() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.whenStarted {
                 viewModel.productResponse.collect { result ->
-                    when (result){
-                        is Resource.Success -> onSuccess()
+                    when (result) {
+                        is Resource.Success -> {
+                            result.data?.let {
+                                onSuccess(it)
+                            }
+                        }
                         is Resource.Error -> showSnackBar(result.message)
                         is Resource.Loading -> onLoading()
-                        is Resource.Empty -> { }
+                        is Resource.Empty -> {
+                        }
                     }
                 }
             }
         }
     }
 
-    private fun onSuccess() {
+    private fun onSuccess(productResponse: ProductResponse) {
         binding.progressBar.isVisible = false
         binding.imSuccess.isVisible = true
         successAnimation.start()
+        viewModel.insertProductItemIntoDb(
+            ProductItem(
+                productName = productResponse.product.product_name,
+                brandName = productResponse.product.brands,
+                quantity = productResponse.product.quantity,
+                barcode = productResponse.product.code,
+                imageUrl = productResponse.product.image_front_url,
+                nutriscore = productResponse.product.nutriscore_grade,
+            )
+        )
     }
 
     private fun onLoading() {
@@ -109,9 +126,10 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
-    private fun showSnackBar(message: String?){
+
+    private fun showSnackBar(message: String?) {
         Snackbar.make(
-            requireView(),message ?: "Error", Snackbar.LENGTH_SHORT
+            requireView(), message ?: "Error", Snackbar.LENGTH_SHORT
         ).show()
     }
 }

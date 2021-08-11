@@ -13,6 +13,8 @@ data class ProductItem(
     val brandName: String,
     val quantity: String,
     val barcode: String,
+    val imageUrl: String,
+    val nutriscore: String,
     val added: Long = System.currentTimeMillis(),
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null
