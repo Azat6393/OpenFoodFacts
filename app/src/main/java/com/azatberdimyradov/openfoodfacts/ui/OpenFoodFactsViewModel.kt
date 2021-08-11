@@ -29,7 +29,9 @@ class OpenFoodFactsViewModel @ViewModelInject constructor(
     }
 
     fun getProductByBarcode(barcode: String) = viewModelScope.launch {
-        repo.getProductByBarcode(barcode)
+        _productResponse.value = Resource.Loading()
+        val result = repo.getProductByBarcode(barcode)
+        _productResponse.value = result
     }
 
 }

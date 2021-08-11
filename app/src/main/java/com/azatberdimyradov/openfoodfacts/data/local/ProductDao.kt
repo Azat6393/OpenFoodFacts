@@ -1,11 +1,9 @@
 package com.azatberdimyradov.openfoodfacts.data.local
 
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
+@Dao
 interface ProductDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

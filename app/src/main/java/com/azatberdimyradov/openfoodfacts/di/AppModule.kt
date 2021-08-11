@@ -3,8 +3,11 @@ package com.azatberdimyradov.openfoodfacts.di
 import android.content.Context
 import androidx.room.Room
 import com.azatberdimyradov.openfoodfacts.R
+import com.azatberdimyradov.openfoodfacts.data.local.ProductDao
 import com.azatberdimyradov.openfoodfacts.data.local.ProductDatabase
 import com.azatberdimyradov.openfoodfacts.data.remote.ProductAPI
+import com.azatberdimyradov.openfoodfacts.repositories.DefaultFoodFactsRepository
+import com.azatberdimyradov.openfoodfacts.repositories.FoodFactsRepository
 import com.azatberdimyradov.openfoodfacts.utils.Constants.BASE_URL
 import com.azatberdimyradov.openfoodfacts.utils.Constants.DATABASE_NAME
 import com.bumptech.glide.Glide
@@ -33,6 +36,13 @@ object AppModule {
     fun provideProductDao(
         database: ProductDatabase
     ) = database.productDao()
+
+    @Singleton
+    @Provides
+    fun provideDefaultFoodFactsRepository(
+        dao: ProductDao,
+        api: ProductAPI
+    ) = DefaultFoodFactsRepository(dao, api) as FoodFactsRepository
 
     @Singleton
     @Provides
