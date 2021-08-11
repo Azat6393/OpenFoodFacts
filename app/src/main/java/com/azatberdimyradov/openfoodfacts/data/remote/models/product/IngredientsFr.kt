@@ -1,4 +1,4 @@
-package com.azatberdimyradov.openfoodfacts.data.remote.models
+package com.azatberdimyradov.openfoodfacts.data.remote.models.product
 
 data class IngredientsFr(
     val angle: Any,
@@ -8,7 +8,6 @@ data class IngredientsFr(
     val ocr: Int,
     val orientation: String,
     val rev: String,
-    val sizes: SizesXXXXXXXXXXXXXXXXX,
     val white_magic: String,
     val x1: Any,
     val x2: Any,

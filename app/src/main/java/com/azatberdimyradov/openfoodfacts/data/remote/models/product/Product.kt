@@ -1,4 +1,4 @@
-package com.azatberdimyradov.openfoodfacts.data.remote.models
+package com.azatberdimyradov.openfoodfacts.data.remote.models.product
 
 import com.google.gson.annotations.SerializedName
 
@@ -28,10 +28,8 @@ data class Product(
     val categories_hierarchy: List<String>,
     val categories_lc: String,
     val categories_old: String,
-    val categories_properties: CategoriesProperties,
     val categories_properties_tags: List<String>,
     val categories_tags: List<String>,
-    val category_properties: CategoryProperties,
     val checkers_tags: List<Any>,
     val ciqual_food_name_tags: List<String>,
     val cities_tags: List<Any>,
@@ -119,7 +117,6 @@ data class Product(
     val labels_old: String,
     val labels_tags: List<Any>,
     val lang: String,
-    val languages: Languages,
     val languages_codes: LanguagesCodes,
     val languages_hierarchy: List<String>,
     val languages_tags: List<String>,
@@ -148,7 +145,6 @@ data class Product(
     val nucleotides_tags: List<Any>,
     val nutrient_levels: NutrientLevels,
     val nutrient_levels_tags: List<String>,
-    val nutriments: Nutriments,
     val nutriscore_data: NutriscoreData,
     val nutriscore_grade: String,
     val nutriscore_score: Int,

@@ -1,4 +1,4 @@
-package com.azatberdimyradov.openfoodfacts.data.remote.models
+package com.azatberdimyradov.openfoodfacts.data.remote.models.product
 
 data class FrontEn(
     val angle: Int,
@@ -7,7 +7,6 @@ data class FrontEn(
     val imgid: String,
     val normalize: Any,
     val rev: String,
-    val sizes: SizesXXXXXXXXXXXXXX,
     val white_magic: Any,
     val x1: String,
     val x2: String,
