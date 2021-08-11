@@ -4,7 +4,6 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.azatberdimyradov.openfoodfacts.data.remote.models.ProductResponse
 import kotlinx.coroutines.flow.Flow
 
 interface ProductDao {
@@ -16,6 +15,6 @@ interface ProductDao {
     suspend fun deleteProductItem(productItem: ProductItem)
 
     @Query("SELECT * FROM product_items")
-    fun observeAllProductItems(): Flow<List<ProductResponse>>
+    fun observeAllProductItems(): Flow<List<ProductItem>>
 
 }
