@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenStarted
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,13 +15,18 @@ import com.azatberdimyradov.openfoodfacts.R
 import com.azatberdimyradov.openfoodfacts.data.adapters.ProductItemAdapter
 import com.azatberdimyradov.openfoodfacts.data.local.ProductItem
 import com.azatberdimyradov.openfoodfacts.databinding.FragmentHistoryBinding
+import com.azatberdimyradov.openfoodfacts.utils.Resource
+import com.azatberdimyradov.openfoodfacts.utils.showSnackBar
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class HistoryFragment : Fragment(R.layout.fragment_history), ProductItemAdapter.OnItemClick {
+class HistoryFragment @Inject constructor(
+
+) : Fragment(R.layout.fragment_history), ProductItemAdapter.OnItemClick {
 
     private val binding by viewBinding(FragmentHistoryBinding::bind)
     private val viewModel: OpenFoodFactsViewModel by viewModels()
@@ -53,9 +59,26 @@ class HistoryFragment : Fragment(R.layout.fragment_history), ProductItemAdapter.
                 }
             }
         }
+        /*viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.whenStarted {
+                viewModel.productResponse.collect { result ->
+                    when(result){
+                        is Resource.Success -> navigationToDetailFragment()
+                        is Resource.Error -> showSnackBar(result.message ?: "Error", requireView())
+                        else -> { }
+                    }
+                }
+            }
+        }*/
     }
 
-    val itemTouchHelperCallBack = object : ItemTouchHelper.SimpleCallback(
+    private fun navigationToDetailFragment(barcode: String) {
+        val action =
+            HistoryFragmentDirections.actionHistoryFragmentToProductDetailsFragment(barcode)
+        findNavController().navigate(action)
+    }
+
+    private val itemTouchHelperCallBack = object : ItemTouchHelper.SimpleCallback(
         ItemTouchHelper.UP or ItemTouchHelper.DOWN,
         ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
     ) {
@@ -81,6 +104,6 @@ class HistoryFragment : Fragment(R.layout.fragment_history), ProductItemAdapter.
     }
 
     override fun onItemClickListener(productItem: ProductItem) {
-
+        navigationToDetailFragment(productItem.barcode)
     }
 }

@@ -13,6 +13,7 @@ import com.azatberdimyradov.openfoodfacts.utils.Constants.NUTRISCORE_B
 import com.azatberdimyradov.openfoodfacts.utils.Constants.NUTRISCORE_C
 import com.azatberdimyradov.openfoodfacts.utils.Constants.NUTRISCORE_D
 import com.azatberdimyradov.openfoodfacts.utils.Constants.NUTRISCORE_E
+import com.azatberdimyradov.openfoodfacts.utils.setNutriscoreImage
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
@@ -64,14 +65,7 @@ class ProductItemAdapter(val listener: OnItemClick) : ListAdapter<ProductItem, P
                 tvBrandNameAndMl.text = "${productItem.brandName} - ${productItem.quantity}"
                 tvAddedDate.text = productItem.addedDateFormatted
                 tvBarcode.text = productItem.barcode
-                when (productItem.nutriscore) {
-                    NUTRISCORE_A -> ivNutriscore.setBackgroundResource(R.drawable.ic_nutriscore_a)
-                    NUTRISCORE_B -> ivNutriscore.setBackgroundResource(R.drawable.ic_nutriscore_b)
-                    NUTRISCORE_C -> ivNutriscore.setBackgroundResource(R.drawable.ic_nutriscore_c)
-                    NUTRISCORE_D -> ivNutriscore.setBackgroundResource(R.drawable.ic_nutriscore_d)
-                    NUTRISCORE_E -> ivNutriscore.setBackgroundResource(R.drawable.ic_nutriscore_e)
-                    else -> ivNutriscore.setBackgroundResource(R.drawable.ic_nutriscore_unknown)
-                }
+                ivNutriscore.setNutriscoreImage(productItem.nutriscore)
             }
         }
     }

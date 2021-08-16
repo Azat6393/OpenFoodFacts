@@ -11,25 +11,37 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenStarted
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.azatberdimyradov.openfoodfacts.R
 import com.azatberdimyradov.openfoodfacts.data.local.ProductItem
 import com.azatberdimyradov.openfoodfacts.data.remote.models.ProductResponse
 import com.azatberdimyradov.openfoodfacts.databinding.FragmentScanBinding
 import com.azatberdimyradov.openfoodfacts.utils.CaptureAct
+import com.azatberdimyradov.openfoodfacts.utils.Constants.SUCCESS_TIME_DELAY
 import com.azatberdimyradov.openfoodfacts.utils.Resource
+import com.azatberdimyradov.openfoodfacts.utils.convertToProductItem
+import com.azatberdimyradov.openfoodfacts.utils.showSnackBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.integration.android.IntentIntegrator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class ScanFragment : Fragment(R.layout.fragment_scan) {
+class ScanFragment @Inject constructor(
+
+) : Fragment(R.layout.fragment_scan) {
 
     private val binding by viewBinding(FragmentScanBinding::bind)
     private val viewModel: OpenFoodFactsViewModel by viewModels()
     private lateinit var successAnimation: AnimatedVectorDrawable
+    private var job: Job? = null
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,7 +75,7 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
                                 onSuccess(it)
                             }
                         }
-                        is Resource.Error -> showSnackBar(result.message)
+                        is Resource.Error -> showSnackBar(result.message ?: "Error", requireView())
                         is Resource.Loading -> onLoading()
                         is Resource.Empty -> {
                         }
@@ -78,15 +90,15 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
         binding.imSuccess.isVisible = true
         successAnimation.start()
         viewModel.insertProductItemIntoDb(
-            ProductItem(
-                productName = productResponse.product.product_name,
-                brandName = productResponse.product.brands,
-                quantity = productResponse.product.quantity,
-                barcode = productResponse.product.code,
-                imageUrl = productResponse.product.image_front_url,
-                nutriscore = productResponse.product.nutriscore_grade,
-            )
+            productResponse.convertToProductItem()
         )
+        job?.cancel()
+        job = MainScope().launch {
+            delay(SUCCESS_TIME_DELAY)
+            val action =
+                ScanFragmentDirections.actionScanFragmentToProductDetailsFragment(productResponse.product.code)
+            findNavController().navigate(action)
+        }
     }
 
     private fun onLoading() {
@@ -120,16 +132,10 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
                 binding.tilBarcode.editText?.setText(result.contents)
                 viewModel.getProductByBarcode(result.contents)
             } else {
-                showSnackBar("No Result")
+                showSnackBar("No Result", requireView())
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
-    }
-
-    private fun showSnackBar(message: String?) {
-        Snackbar.make(
-            requireView(), message ?: "Error", Snackbar.LENGTH_SHORT
-        ).show()
     }
 }

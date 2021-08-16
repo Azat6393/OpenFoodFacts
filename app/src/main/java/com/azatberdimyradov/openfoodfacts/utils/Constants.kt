@@ -11,4 +11,6 @@ object Constants {
     const val NUTRISCORE_D = "d"
     const val NUTRISCORE_E = "e"
 
+    const val SUCCESS_TIME_DELAY = 1500L
+
 }

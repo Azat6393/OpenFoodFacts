@@ -9,10 +9,28 @@
         android:id="@+id/scanFragment"
         android:name="com.azatberdimyradov.openfoodfacts.ui.ScanFragment"
         android:label="Scan"
-        tools:layout="@layout/fragment_scan" />
+        tools:layout="@layout/fragment_scan" >
+        <action
+            android:id="@+id/action_scanFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.azatberdimyradov.openfoodfacts.ui.HistoryFragment"
         android:label="History"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.azatberdimyradov.openfoodfacts.ui.ProductDetailsFragment"
+        android:label="Product Details"
+        tools:layout="@layout/fragment_product_details">
+        <argument
+            android:name="productBarcode"
+            android:defaultValue="null"
+            app:argType="string" />
+    </fragment>
 </navigation>
