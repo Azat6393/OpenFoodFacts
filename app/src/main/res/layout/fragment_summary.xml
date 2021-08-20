@@ -5,17 +5,112 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="188dp"
-        android:layout_marginTop="423dp"
-        android:layout_marginEnd="187dp"
-        android:layout_marginBottom="422dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:id="@+id/linearLayout_images"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:weightSum="10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivNutriscore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:paddingEnd="15dp"
+            tools:src="@drawable/ic_nutriscore_a" />
+
+        <ImageView
+            android:id="@+id/ivNova"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            tools:src="@drawable/ic_nova_group_1" />
+
+        <ImageView
+            android:id="@+id/ivEcoscore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:paddingStart="15dp"
+            tools:src="@drawable/ic_ecoscore_a" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_nutrient_level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout_images">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:text="@string/nutrient_levels_for_100g"
+            android:textSize="25sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNutrientLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_nutrient_lvl" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_nutrient_level">
+
+        <TextView
+            android:id="@+id/tvAdditivesLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:text="@string/additives"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/tvAdditives"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="sans-serif-light"
+            android:paddingStart="20sp"
+            android:textSize="25sp"
+            tools:text="E101 - Riboflavin \nE101i - Riboflavin
+\nE101i - Riboflavin \nE101i - Riboflavin \nE101i - Riboflavin" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvCategories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingStart="20sp"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        tools:text="Categories: Beverages, Carbonated, drinks, Sodas, Energy drinks" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
