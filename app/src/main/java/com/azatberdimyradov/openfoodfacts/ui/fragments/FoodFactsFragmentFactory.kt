@@ -1,4 +1,4 @@
-package com.azatberdimyradov.openfoodfacts.ui
+package com.azatberdimyradov.openfoodfacts.ui.fragments
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory

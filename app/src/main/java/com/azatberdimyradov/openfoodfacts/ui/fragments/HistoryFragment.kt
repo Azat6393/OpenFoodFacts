@@ -1,4 +1,4 @@
-package com.azatberdimyradov.openfoodfacts.ui
+package com.azatberdimyradov.openfoodfacts.ui.fragments
 
 import android.os.Bundle
 import android.view.View
@@ -15,8 +15,7 @@ import com.azatberdimyradov.openfoodfacts.R
 import com.azatberdimyradov.openfoodfacts.data.adapters.ProductItemAdapter
 import com.azatberdimyradov.openfoodfacts.data.local.ProductItem
 import com.azatberdimyradov.openfoodfacts.databinding.FragmentHistoryBinding
-import com.azatberdimyradov.openfoodfacts.utils.Resource
-import com.azatberdimyradov.openfoodfacts.utils.showSnackBar
+import com.azatberdimyradov.openfoodfacts.ui.OpenFoodFactsViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect

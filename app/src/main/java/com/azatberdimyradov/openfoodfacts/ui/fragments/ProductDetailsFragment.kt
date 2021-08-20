@@ -1,4 +1,4 @@
-package com.azatberdimyradov.openfoodfacts.ui
+package com.azatberdimyradov.openfoodfacts.ui.fragments
 
 import android.os.Bundle
 import android.view.View
@@ -16,8 +16,14 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.viewpager2.widget.ViewPager2
+import com.azatberdimyradov.openfoodfacts.ui.OpenFoodFactsViewModel
+import com.azatberdimyradov.openfoodfacts.ui.fragments.childFragments.FragmentAdapter
 import com.bumptech.glide.RequestManager
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_product_details.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -31,6 +37,7 @@ class ProductDetailsFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupChildFragments()
         subscribeToObserves()
         viewModel.getProductByBarcode(args.productBarcode)
     }
@@ -54,6 +61,21 @@ class ProductDetailsFragment @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    private fun setupChildFragments() {
+        val fragmentAdapter = FragmentAdapter(childFragmentManager, lifecycle)
+
+        binding.apply {
+            viewPager.adapter = fragmentAdapter
+            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                when(position){
+                    0 -> tab.text = "Summary"
+                    1 -> tab.text = "Ingredients"
+                    2 -> tab.text = "Nutrition"
+                }
+            }.attach()
         }
     }
 

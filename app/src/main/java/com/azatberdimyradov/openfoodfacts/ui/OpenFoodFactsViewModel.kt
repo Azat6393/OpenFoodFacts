@@ -33,5 +33,4 @@ class OpenFoodFactsViewModel @ViewModelInject constructor(
         val result = repo.getProductByBarcode(barcode)
         _productResponse.value = result
     }
-
 }

@@ -11,5 +11,4 @@ interface ProductAPI {
     suspend fun getProductByBarcode(
         @Path("barcode") barcode: String
     ): Response<ProductResponse>
-
 }

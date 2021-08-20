@@ -1,4 +1,4 @@
-package com.azatberdimyradov.openfoodfacts.ui
+package com.azatberdimyradov.openfoodfacts.ui.fragments
 
 import android.content.Intent
 import android.graphics.drawable.AnimatedVectorDrawable
@@ -14,15 +14,14 @@ import androidx.lifecycle.whenStarted
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.azatberdimyradov.openfoodfacts.R
-import com.azatberdimyradov.openfoodfacts.data.local.ProductItem
 import com.azatberdimyradov.openfoodfacts.data.remote.models.ProductResponse
 import com.azatberdimyradov.openfoodfacts.databinding.FragmentScanBinding
+import com.azatberdimyradov.openfoodfacts.ui.OpenFoodFactsViewModel
 import com.azatberdimyradov.openfoodfacts.utils.CaptureAct
 import com.azatberdimyradov.openfoodfacts.utils.Constants.SUCCESS_TIME_DELAY
 import com.azatberdimyradov.openfoodfacts.utils.Resource
 import com.azatberdimyradov.openfoodfacts.utils.convertToProductItem
 import com.azatberdimyradov.openfoodfacts.utils.showSnackBar
-import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.integration.android.IntentIntegrator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job

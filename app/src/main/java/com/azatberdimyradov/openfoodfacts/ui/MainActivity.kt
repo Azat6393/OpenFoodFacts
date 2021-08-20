@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.azatberdimyradov.openfoodfacts.R
 import com.azatberdimyradov.openfoodfacts.databinding.ActivityMainBinding
+import com.azatberdimyradov.openfoodfacts.ui.fragments.FoodFactsFragmentFactory
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
