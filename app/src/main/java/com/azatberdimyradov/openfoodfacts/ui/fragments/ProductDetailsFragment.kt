@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenStarted
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -17,6 +18,7 @@ import kotlinx.coroutines.launch
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
+import com.azatberdimyradov.openfoodfacts.ui.MainActivity
 import com.azatberdimyradov.openfoodfacts.ui.OpenFoodFactsViewModel
 import com.azatberdimyradov.openfoodfacts.ui.fragments.childFragments.FragmentAdapter
 import com.bumptech.glide.RequestManager
@@ -32,14 +34,13 @@ class ProductDetailsFragment @Inject constructor(
 ) : Fragment(R.layout.fragment_product_details) {
 
     private val binding by viewBinding(FragmentProductDetailsBinding::bind)
-    private val viewModel: OpenFoodFactsViewModel by viewModels()
-    private val args by navArgs<ProductDetailsFragmentArgs>()
+    private val viewModel: OpenFoodFactsViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).binding.bottomNavigationView.isVisible = false
         setupChildFragments()
         subscribeToObserves()
-        viewModel.getProductByBarcode(args.productBarcode)
     }
 
     private fun subscribeToObserves() {
@@ -50,14 +51,10 @@ class ProductDetailsFragment @Inject constructor(
                         is Resource.Success -> {
                             result.data?.let {
                                 fillDetails(it)
-                                loadingState(false)
                             }
                         }
                         is Resource.Error -> showSnackBar(result.message ?: "Error", requireView())
-                        is Resource.Loading -> loadingState(true)
-                        is Resource.Empty -> {
-
-                        }
+                        else -> { }
                     }
                 }
             }
@@ -70,19 +67,12 @@ class ProductDetailsFragment @Inject constructor(
         binding.apply {
             viewPager.adapter = fragmentAdapter
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-                when(position){
+                when (position) {
                     0 -> tab.text = "Summary"
                     1 -> tab.text = "Ingredients"
                     2 -> tab.text = "Nutrition"
                 }
             }.attach()
-        }
-    }
-
-    private fun loadingState(state: Boolean) {
-        binding.apply {
-            headerCardView.isVisible = !state
-            progressBar.isVisible = state
         }
     }
 

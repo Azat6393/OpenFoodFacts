@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/berdi/AndroidStudioProjects/OpenFoodFacts/app/src/main/res/drawable/avd_done.xml" value="0.24027777777777778" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/OpenFoodFacts/app/src/main/res/drawable/default_circle.xml" value="0.236986301369863" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/OpenFoodFacts/app/src/main/res/drawable/high.xml" value="0.236986301369863" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/OpenFoodFacts/app/src/main/res/drawable/ic_barcode.xml" value="0.2703125" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/OpenFoodFacts/app/src/main/res/drawable/ic_barcode_scan.xml" value="0.24027777777777778" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/OpenFoodFacts/app/src/main/res/drawable/ic_baseline_history_24.xml" value="0.2703125" />
@@ -25,6 +27,8 @@
         <entry key="..\:/Users/berdi/AndroidStudioProjects/OpenFoodFacts/app/src/main/res/drawable/ic_nutriscore_e.xml" value="0.24027777777777778" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/OpenFoodFacts/app/src/main/res/drawable/ic_nutriscore_small_a.xml" value="0.24027777777777778" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/OpenFoodFacts/app/src/main/res/drawable/ic_nutriscore_unknown.xml" value="0.24027777777777778" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/OpenFoodFacts/app/src/main/res/drawable/low.xml" value="0.236986301369863" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/OpenFoodFacts/app/src/main/res/drawable/moderate.xml" value="0.236986301369863" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/OpenFoodFacts/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/OpenFoodFacts/app/src/main/res/layout/fragment_history.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/OpenFoodFacts/app/src/main/res/layout/fragment_ingredients.xml" value="0.22592592592592592" />

@@ -145,6 +145,7 @@ data class Product(
     val nucleotides_tags: List<Any>,
     val nutrient_levels: NutrientLevels,
     val nutrient_levels_tags: List<String>,
+    val nutriments: Nutriments,
     val nutriscore_data: NutriscoreData,
     val nutriscore_grade: String,
     val nutriscore_score: Int,

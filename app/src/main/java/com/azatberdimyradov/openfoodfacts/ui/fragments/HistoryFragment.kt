@@ -2,7 +2,9 @@ package com.azatberdimyradov.openfoodfacts.ui.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenStarted
@@ -16,6 +18,8 @@ import com.azatberdimyradov.openfoodfacts.data.adapters.ProductItemAdapter
 import com.azatberdimyradov.openfoodfacts.data.local.ProductItem
 import com.azatberdimyradov.openfoodfacts.databinding.FragmentHistoryBinding
 import com.azatberdimyradov.openfoodfacts.ui.OpenFoodFactsViewModel
+import com.azatberdimyradov.openfoodfacts.utils.Resource
+import com.azatberdimyradov.openfoodfacts.utils.showSnackBar
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -28,7 +32,7 @@ class HistoryFragment @Inject constructor(
 ) : Fragment(R.layout.fragment_history), ProductItemAdapter.OnItemClick {
 
     private val binding by viewBinding(FragmentHistoryBinding::bind)
-    private val viewModel: OpenFoodFactsViewModel by viewModels()
+    private val viewModel: OpenFoodFactsViewModel by activityViewModels()
     private lateinit var productItemAdapter: ProductItemAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,22 +62,32 @@ class HistoryFragment @Inject constructor(
                 }
             }
         }
-        /*viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.whenStarted {
                 viewModel.productResponse.collect { result ->
-                    when(result){
-                        is Resource.Success -> navigationToDetailFragment()
-                        is Resource.Error -> showSnackBar(result.message ?: "Error", requireView())
-                        else -> { }
+                    when (result) {
+                        is Resource.Success -> {
+                            binding.progressBar.isVisible = false
+                            navigationToDetailFragment()
+                        }
+                        is Resource.Error -> {
+                            binding.progressBar.isVisible = false
+                            showSnackBar(result.message ?: "Error", requireView())
+                        }
+                        is Resource.Loading -> {
+                            binding.progressBar.isVisible = true
+                        }
+                        is Resource.Empty -> {
+                        }
                     }
                 }
             }
-        }*/
+        }
     }
 
-    private fun navigationToDetailFragment(barcode: String) {
+    private fun navigationToDetailFragment() {
         val action =
-            HistoryFragmentDirections.actionHistoryFragmentToProductDetailsFragment(barcode)
+            HistoryFragmentDirections.actionHistoryFragmentToProductDetailsFragment()
         findNavController().navigate(action)
     }
 
@@ -103,6 +117,6 @@ class HistoryFragment @Inject constructor(
     }
 
     override fun onItemClickListener(productItem: ProductItem) {
-        navigationToDetailFragment(productItem.barcode)
+        viewModel.getProductByBarcode(productItem.barcode)
     }
 }

@@ -27,10 +27,5 @@
         android:id="@+id/productDetailsFragment"
         android:name="com.azatberdimyradov.openfoodfacts.ui.fragments.ProductDetailsFragment"
         android:label="Product Details"
-        tools:layout="@layout/fragment_product_details">
-        <argument
-            android:name="productBarcode"
-            android:defaultValue="null"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/fragment_product_details"/>
 </navigation>

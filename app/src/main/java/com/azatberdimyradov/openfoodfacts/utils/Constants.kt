@@ -24,4 +24,13 @@ object Constants {
 
     const val SUCCESS_TIME_DELAY = 1500L
 
+    const val FAT = "Fat"
+    const val SALT = "Salt"
+    const val SATURATED_FAT = "Saturated fat"
+    const val SUGARS = "Sugars"
+
+    const val LOW = "low"
+    const val MODERATE = "moderate"
+    const val HIGH = "high"
+
 }

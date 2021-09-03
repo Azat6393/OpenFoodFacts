@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/linearLayout_images"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
-        android:weightSum="10"
+        android:weightSum="14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,23 +19,28 @@
             android:id="@+id/ivNutriscore"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:paddingEnd="15dp"
+            android:layout_weight="6"
+            android:layout_gravity="center"
+            android:layout_marginEnd="15dp"
             tools:src="@drawable/ic_nutriscore_a" />
 
         <ImageView
             android:id="@+id/ivNova"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="2"
             tools:src="@drawable/ic_nova_group_1" />
 
         <ImageView
             android:id="@+id/ivEcoscore"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:paddingStart="15dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
             tools:src="@drawable/ic_ecoscore_a" />
 
     </LinearLayout>
@@ -79,14 +84,6 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout_nutrient_level">
 
         <TextView
-            android:id="@+id/tvAdditivesLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="20dp"
-            android:text="@string/additives"
-            android:textSize="25sp" />
-
-        <TextView
             android:id="@+id/tvAdditives"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -107,7 +104,10 @@
         android:layout_marginTop="20dp"
         android:paddingStart="20sp"
         android:textSize="25sp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         tools:text="Categories: Beverages, Carbonated, drinks, Sodas, Energy drinks" />
