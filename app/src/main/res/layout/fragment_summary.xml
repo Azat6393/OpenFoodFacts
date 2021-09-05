@@ -59,6 +59,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="20dp"
+            android:textColor="@color/grey"
+            android:textStyle="bold"
             android:text="@string/nutrient_levels_for_100g"
             android:textSize="25sp" />
 
@@ -88,7 +90,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:fontFamily="sans-serif-light"
             android:paddingStart="20sp"
             android:textSize="25sp"
             tools:text="E101 - Riboflavin \nE101i - Riboflavin
@@ -102,7 +103,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:paddingStart="20sp"
+        android:paddingStart="20dp"
+        android:paddingEnd="10dp"
         android:textSize="25sp"
         android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"

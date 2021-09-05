@@ -1,5 +1,7 @@
 package com.azatberdimyradov.openfoodfacts.utils
 
+import android.graphics.Color
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
@@ -88,7 +90,9 @@ fun ImageView.setEcoscoreImage(ecoscore: String) {
 }
 
 fun setAdditivesText(product: ProductResponse, fragment: Fragment) = buildSpannedString {
-    bold { append(fragment.getString(R.string.txtAdditives)) }
+    bold {
+        append(fragment.getString(R.string.txtAdditives))
+    }
     product.product.additives_original_tags.forEach {
         append("\n")
         val additiveName = it.substring(it.lastIndexOf(":") + 1)
@@ -108,8 +112,29 @@ fun setAdditivesText(product: ProductResponse, fragment: Fragment) = buildSpanne
 }
 
 fun setCategories(product: ProductResponse, fragment: Fragment) = buildSpannedString {
-    bold { append(fragment.getString(R.string.txtCategories)) }
+    bold {
+        append(fragment.getString(R.string.txtCategories))
+    }
     append(product.product.categories)
+}
+
+fun setIngredientList(product: ProductResponse, fragment: Fragment) = buildSpannedString {
+    append("${fragment.getString(R.string.txtIngredientsList)} ")
+    append(product.product.ingredients_text)
+}
+
+fun setVitamins(product: ProductResponse, fragment: Fragment) = buildSpannedString {
+    bold { append(fragment.getString(R.string.txtVitamins)) }
+    product.product.vitamins_tags.forEach {
+        val vitaminName = it.substring(it.lastIndexOf(":") + 1)
+        append("$vitaminName , ")
+    }
+}
+
+fun setNovaGroupInfo(product: ProductResponse, fragment: Fragment) = buildSpannedString {
+    val replacedText = product.product.nova_groups_tags[0].replace('-',' ')
+    val novaGroupInfo = replacedText.substring(replacedText.lastIndexOf(":") + 1)
+    bold { append("Group $novaGroupInfo") }
 }
 
 fun Product.convertNutrientLevelList(): List<NutrientLevelItem> {
@@ -142,14 +167,14 @@ fun Product.convertNutrientLevelList(): List<NutrientLevelItem> {
     return list
 }
 
-fun NutrientLevelItem.getDecRes() = when(this.category){
+fun NutrientLevelItem.getDecRes() = when (this.category) {
     MODERATE -> R.string.txtNutritionLevelModerate
     LOW -> R.string.txtNutritionLevelLow
     HIGH -> R.string.txtNutritionLevelHigh
     else -> 0
 }
 
-fun NutrientLevelItem.getImgRes() = when(this.category){
+fun NutrientLevelItem.getImgRes() = when (this.category) {
     MODERATE -> R.drawable.moderate
     LOW -> R.drawable.low
     HIGH -> R.drawable.high
