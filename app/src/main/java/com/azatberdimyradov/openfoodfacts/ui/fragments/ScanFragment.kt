@@ -129,6 +129,7 @@ class ScanFragment @Inject constructor(
     }
 
     private fun scanCode() {
+        IntentIntegrator.forSupportFragment(this).initiateScan()
         val integrator = IntentIntegrator(requireActivity())
         integrator.captureActivity = CaptureAct::class.java
         integrator.setOrientationLocked(false)
