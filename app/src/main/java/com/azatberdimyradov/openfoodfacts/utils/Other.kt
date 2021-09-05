@@ -11,8 +11,10 @@ import androidx.fragment.app.Fragment
 import com.azatberdimyradov.openfoodfacts.R
 import com.azatberdimyradov.openfoodfacts.data.local.ProductItem
 import com.azatberdimyradov.openfoodfacts.data.remote.models.NutrientLevelItem
+import com.azatberdimyradov.openfoodfacts.data.remote.models.NutritionFactsItem
 import com.azatberdimyradov.openfoodfacts.data.remote.models.ProductResponse
 import com.azatberdimyradov.openfoodfacts.data.remote.models.product.NutrientLevels
+import com.azatberdimyradov.openfoodfacts.data.remote.models.product.Nutriments
 import com.azatberdimyradov.openfoodfacts.data.remote.models.product.Product
 import com.azatberdimyradov.openfoodfacts.utils.Constants.ECOSCORE_A
 import com.azatberdimyradov.openfoodfacts.utils.Constants.ECOSCORE_B
@@ -132,7 +134,7 @@ fun setVitamins(product: ProductResponse, fragment: Fragment) = buildSpannedStri
 }
 
 fun setNovaGroupInfo(product: ProductResponse, fragment: Fragment) = buildSpannedString {
-    val replacedText = product.product.nova_groups_tags[0].replace('-',' ')
+    val replacedText = product.product.nova_groups_tags[0].replace('-', ' ')
     val novaGroupInfo = replacedText.substring(replacedText.lastIndexOf(":") + 1)
     bold { append("Group $novaGroupInfo") }
 }
@@ -162,6 +164,95 @@ fun Product.convertNutrientLevelList(): List<NutrientLevelItem> {
             nutrient_levels.sugars,
             nutriments.sugars.toDouble(),
             nutriments.sugars_unit
+        )
+    )
+    return list
+}
+
+fun Nutriments.convertNutritionFactItemList(): List<NutritionFactsItem> {
+    val list = mutableListOf<NutritionFactsItem>()
+    list.add(
+        NutritionFactsItem(
+            name = "Carbohydrates",
+            value = this.carbohydrates_100g.toDouble(),
+            value_unit = carbohydrates_unit
+        )
+    )
+    list.add(
+        NutritionFactsItem(
+            name = "Energy in calories (kcal)",
+            value = this.energy_kcal_100g.toDouble(),
+            value_unit = energy_kcal_unit
+        )
+    )
+    list.add(
+        NutritionFactsItem(
+            name = "Fat",
+            value = this.fat_100g.toDouble(),
+            value_unit = fat_unit
+        )
+    )
+    list.add(
+        NutritionFactsItem(
+            name = "Saturated fat",
+            value = saturated_fat_100g.toDouble(),
+            value_unit = saturated_fat_unit
+        )
+    )
+    list.add(
+        NutritionFactsItem(
+            name = "Sugar",
+            value = sugars_100g.toDouble(),
+            value_unit = sugars_unit
+        )
+    )
+    list.add(
+        NutritionFactsItem(
+            name = "Dietary fiber",
+            value = fiber_100g.toDouble(),
+            value_unit = fiber_unit
+        )
+    )
+    list.add(
+        NutritionFactsItem(
+            name = "Proteins",
+            value = proteins_100g.toDouble(),
+            value_unit = proteins_unit
+        )
+    )
+    list.add(
+        NutritionFactsItem(
+            name = "Sodium",
+            value = sodium_100g,
+            value_unit = sodium_unit
+        )
+    )
+    list.add(
+        NutritionFactsItem(
+            name = "Salt",
+            value = salt_100g,
+            value_unit = salt_unit
+        )
+    )
+    list.add(
+        NutritionFactsItem(
+            name = "Vitamin PP",
+            value = vitamin_pp_100g,
+            value_unit = vitamin_pp_unit
+        )
+    )
+    list.add(
+        NutritionFactsItem(
+            name = "Vitamin B6",
+            value = vitamin_b6_100g,
+            value_unit = vitamin_b6_unit
+        )
+    )
+    list.add(
+        NutritionFactsItem(
+            name = "Pantothenic acid",
+            value = pantothenic_acid_100g,
+            value_unit = pantothenic_acid_unit
         )
     )
     return list

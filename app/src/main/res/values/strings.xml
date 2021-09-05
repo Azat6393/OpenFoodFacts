@@ -10,4 +10,6 @@
     <string name="txtNutritionLevelHigh">in high quantity</string>
     <string name="txtVitamins">"Vitamins: "</string>
     <string name="txtIngredientsList">Ingredients list: </string>
+    <string name="nutrition_facts_for_100_g">Nutrition facts For 100 g</string>
+    <string name="per_serving">Per serving</string>
 </resources>

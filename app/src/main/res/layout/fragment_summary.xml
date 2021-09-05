@@ -1,118 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/linearLayout_images"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        android:weightSum="14"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/ivNutriscore"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:layout_gravity="center"
-            android:layout_marginEnd="15dp"
-            tools:src="@drawable/ic_nutriscore_a" />
+        <LinearLayout
+            android:id="@+id/linearLayout_images"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:weightSum="14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/ivNova"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="2"
-            tools:src="@drawable/ic_nova_group_1" />
+            <ImageView
+                android:id="@+id/ivNutriscore"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="15dp"
+                android:layout_weight="6"
+                tools:src="@drawable/ic_nutriscore_a" />
 
-        <ImageView
-            android:id="@+id/ivEcoscore"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="6"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center"
-            tools:src="@drawable/ic_ecoscore_a" />
+            <ImageView
+                android:id="@+id/ivNova"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                tools:src="@drawable/ic_nova_group_1" />
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/ivEcoscore"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="6"
+                tools:src="@drawable/ic_ecoscore_a" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout_nutrient_level"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout_images">
+        </LinearLayout>
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/linearLayout_nutrient_level"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="20dp"
-            android:textColor="@color/grey"
-            android:textStyle="bold"
-            android:text="@string/nutrient_levels_for_100g"
-            android:textSize="25sp" />
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout_images">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvNutrientLevel"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:paddingEnd="10dp"
+                android:text="@string/nutrient_levels_for_100g"
+                android:textColor="@color/grey"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvNutrientLevel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_nutrient_lvl" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            tools:itemCount="4"
-            tools:listitem="@layout/item_nutrient_lvl" />
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout_nutrient_level">
 
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout_nutrient_level">
-
-        <TextView
-            android:id="@+id/tvAdditives"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:paddingStart="20sp"
-            android:textSize="25sp"
-            tools:text="E101 - Riboflavin \nE101i - Riboflavin
+            <TextView
+                android:id="@+id/tvAdditives"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingStart="20sp"
+                android:paddingEnd="10dp"
+                android:textSize="25sp"
+                tools:text="E101 - Riboflavin \nE101i - Riboflavin
 \nE101i - Riboflavin \nE101i - Riboflavin \nE101i - Riboflavin" />
 
-    </LinearLayout>
+        </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/tvCategories"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="10dp"
-        android:textSize="25sp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        tools:text="Categories: Beverages, Carbonated, drinks, Sodas, Energy drinks" />
+        <TextView
+            android:id="@+id/tvCategories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="15dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="10dp"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            tools:text="Categories: Beverages, Carbonated, drinks, Sodas, Energy drinks" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
