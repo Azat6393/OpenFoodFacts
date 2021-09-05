@@ -31,7 +31,10 @@ class DefaultFoodFactsRepository @Inject constructor(
             val response = productApi.getProductByBarcode(barcode)
             if (response.isSuccessful){
                 response.body()?.let {
-                    return@let Resource.Success(it)
+                    if (it.status == 1){
+                        return@let Resource.Success(it)
+                    }
+                    return@let Resource.Error("product not found")
                 } ?: Resource.Error(response.errorBody().toString())
             }else {
                 Resource.Error(response.errorBody().toString())

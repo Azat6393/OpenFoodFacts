@@ -9,15 +9,15 @@ import java.text.DateFormat
 @Entity(tableName = "product_items")
 @Parcelize
 data class ProductItem(
-    val productName: String,
-    val brandName: String,
-    val quantity: String,
+    val productName: String? = null,
+    val brandName: String? = null,
+    val quantity: String? = null,
     val barcode: String,
-    val imageUrl: String,
-    val nutriscore: String,
+    val imageUrl: String? = null,
+    val nutriscore: String? = null,
     val added: Long = System.currentTimeMillis(),
     @PrimaryKey(autoGenerate = false)
-    val id: Int
+    val id: Long
 ) : Parcelable {
     val addedDateFormatted: String
         get() = DateFormat.getDateInstance().format(added)

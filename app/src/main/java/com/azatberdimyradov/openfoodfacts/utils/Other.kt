@@ -49,7 +49,7 @@ fun ProductResponse.convertToProductItem(): ProductItem {
         barcode = this.product.code,
         imageUrl = this.product.image_front_url,
         nutriscore = this.product.nutriscore_grade,
-        id = this.product.code.toInt()
+        id = this.product.code.toLong()
     )
 }
 
@@ -60,7 +60,7 @@ fun showSnackBar(message: String?, view: View) {
     println(message)
 }
 
-fun ImageView.setNutriscoreImage(nutriscore: String) {
+fun ImageView.setNutriscoreImage(nutriscore: String?) {
     when (nutriscore) {
         NUTRISCORE_A -> this.setBackgroundResource(R.drawable.ic_nutriscore_a)
         NUTRISCORE_B -> this.setBackgroundResource(R.drawable.ic_nutriscore_b)
@@ -123,7 +123,9 @@ fun setCategories(product: ProductResponse, fragment: Fragment) = buildSpannedSt
 
 fun setIngredientList(product: ProductResponse, fragment: Fragment) = buildSpannedString {
     append("${fragment.getString(R.string.txtIngredientsList)} ")
-    append(product.product.ingredients_text)
+    product.product.ingredients_text?.let {
+        append(it)
+    }
 }
 
 fun setVitamins(product: ProductResponse, fragment: Fragment) = buildSpannedString {

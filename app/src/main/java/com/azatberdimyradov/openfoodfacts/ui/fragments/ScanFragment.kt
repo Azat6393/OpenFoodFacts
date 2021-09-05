@@ -74,13 +74,18 @@ class ScanFragment @Inject constructor(
                                 onSuccess(it)
                             }
                         }
-                        is Resource.Error -> showSnackBar(result.message ?: "Error", requireView())
+                        is Resource.Error -> onError(result)
                         is Resource.Loading -> onLoading()
                         is Resource.Empty -> onEmpty()
                     }
                 }
             }
         }
+    }
+
+    private fun onError(result: Resource.Error<ProductResponse>) {
+        showSnackBar(result.message ?: "Error", requireView())
+        onEmpty()
     }
 
     private fun onEmpty() {
