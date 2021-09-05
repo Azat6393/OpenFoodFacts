@@ -38,7 +38,7 @@ class ProductDetailsFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as MainActivity).binding.bottomNavigationView.isVisible = false
+        bottomNavigationViewVisibility(false)
         setupChildFragments()
         subscribeToObserves()
     }
@@ -84,5 +84,15 @@ class ProductDetailsFragment @Inject constructor(
             glide.load(productResponse.product.image_front_url)
                 .into(imProductImage)
         }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        bottomNavigationViewVisibility(true)
+        viewModel.clearProductResponse()
+    }
+
+    private fun bottomNavigationViewVisibility(visible: Boolean) {
+        (activity as MainActivity).binding.bottomNavigationView.isVisible = visible
     }
 }

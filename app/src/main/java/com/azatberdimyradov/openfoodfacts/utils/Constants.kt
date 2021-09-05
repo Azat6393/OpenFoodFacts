@@ -22,7 +22,7 @@ object Constants {
     const val ECOSCORE_D = "d"
     const val ECOSCORE_E = "e"
 
-    const val SUCCESS_TIME_DELAY = 1500L
+    const val SUCCESS_TIME_DELAY = 1200L
 
     const val FAT = "Fat"
     const val SALT = "Salt"

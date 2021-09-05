@@ -28,6 +28,10 @@ class OpenFoodFactsViewModel @ViewModelInject constructor(
         repo.deleteProductItemFromDb(productItem)
     }
 
+    fun clearProductResponse() = viewModelScope.launch {
+        _productResponse.value = Resource.Empty()
+    }
+
     fun getProductByBarcode(barcode: String) = viewModelScope.launch {
         _productResponse.value = Resource.Loading()
         val result = repo.getProductByBarcode(barcode)

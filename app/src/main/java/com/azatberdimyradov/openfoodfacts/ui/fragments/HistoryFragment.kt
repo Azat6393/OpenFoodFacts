@@ -18,10 +18,14 @@ import com.azatberdimyradov.openfoodfacts.data.adapters.ProductItemAdapter
 import com.azatberdimyradov.openfoodfacts.data.local.ProductItem
 import com.azatberdimyradov.openfoodfacts.databinding.FragmentHistoryBinding
 import com.azatberdimyradov.openfoodfacts.ui.OpenFoodFactsViewModel
+import com.azatberdimyradov.openfoodfacts.utils.Constants
 import com.azatberdimyradov.openfoodfacts.utils.Resource
 import com.azatberdimyradov.openfoodfacts.utils.showSnackBar
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,6 +38,8 @@ class HistoryFragment @Inject constructor(
     private val binding by viewBinding(FragmentHistoryBinding::bind)
     private val viewModel: OpenFoodFactsViewModel by activityViewModels()
     private lateinit var productItemAdapter: ProductItemAdapter
+    private var job: Job? = null
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,22 +68,27 @@ class HistoryFragment @Inject constructor(
                 }
             }
         }
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.lifecycle.whenStarted {
-                viewModel.productResponse.collect { result ->
-                    when (result) {
-                        is Resource.Success -> {
-                            binding.progressBar.isVisible = false
-                            navigationToDetailFragment()
-                        }
-                        is Resource.Error -> {
-                            binding.progressBar.isVisible = false
-                            showSnackBar(result.message ?: "Error", requireView())
-                        }
-                        is Resource.Loading -> {
-                            binding.progressBar.isVisible = true
-                        }
-                        is Resource.Empty -> {
+        job?.cancel()
+        job = MainScope().launch {
+            delay(500L)
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewLifecycleOwner.lifecycle.whenStarted {
+                    viewModel.productResponse.collect { result ->
+                        when (result) {
+                            is Resource.Success -> {
+                                binding.progressBar.isVisible = false
+                                navigationToDetailFragment()
+                            }
+                            is Resource.Error -> {
+                                binding.progressBar.isVisible = false
+                                showSnackBar(result.message ?: "Error", requireView())
+                            }
+                            is Resource.Loading -> {
+                                binding.progressBar.isVisible = true
+                            }
+                            is Resource.Empty -> {
+                                binding.progressBar.isVisible = false
+                            }
                         }
                     }
                 }

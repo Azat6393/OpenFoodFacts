@@ -76,11 +76,19 @@ class ScanFragment @Inject constructor(
                         }
                         is Resource.Error -> showSnackBar(result.message ?: "Error", requireView())
                         is Resource.Loading -> onLoading()
-                        is Resource.Empty -> {
-                        }
+                        is Resource.Empty -> onEmpty()
                     }
                 }
             }
+        }
+    }
+
+    private fun onEmpty() {
+        binding.apply {
+            progressBar.isVisible = false
+            imSuccess.isVisible = false
+            linearLayout.isVisible = true
+            job?.cancel()
         }
     }
 
