@@ -12,4 +12,5 @@
     <string name="txtIngredientsList">Ingredients list: </string>
     <string name="nutrition_facts_for_100_g">Nutrition facts For 100 g</string>
     <string name="per_serving">Per serving</string>
+    <string name="txtGroup">Group</string>
 </resources>

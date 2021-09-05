@@ -12,7 +12,7 @@ interface ProductDao {
     @Delete
     suspend fun deleteProductItem(productItem: ProductItem)
 
-    @Query("SELECT * FROM product_items")
+    @Query("SELECT * FROM product_items ORDER BY added")
     fun observeAllProductItems(): Flow<List<ProductItem>>
 
 }

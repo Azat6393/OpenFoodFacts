@@ -16,8 +16,8 @@ data class ProductItem(
     val imageUrl: String,
     val nutriscore: String,
     val added: Long = System.currentTimeMillis(),
-    @PrimaryKey(autoGenerate = true)
-    val id: Int? = null
+    @PrimaryKey(autoGenerate = false)
+    val id: Int
 ) : Parcelable {
     val addedDateFormatted: String
         get() = DateFormat.getDateInstance().format(added)

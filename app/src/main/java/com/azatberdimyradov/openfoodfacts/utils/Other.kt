@@ -49,6 +49,7 @@ fun ProductResponse.convertToProductItem(): ProductItem {
         barcode = this.product.code,
         imageUrl = this.product.image_front_url,
         nutriscore = this.product.nutriscore_grade,
+        id = this.product.code.toInt()
     )
 }
 
@@ -136,7 +137,7 @@ fun setVitamins(product: ProductResponse, fragment: Fragment) = buildSpannedStri
 fun setNovaGroupInfo(product: ProductResponse, fragment: Fragment) = buildSpannedString {
     val replacedText = product.product.nova_groups_tags[0].replace('-', ' ')
     val novaGroupInfo = replacedText.substring(replacedText.lastIndexOf(":") + 1)
-    bold { append("Group $novaGroupInfo") }
+    bold { append("${fragment.getString(R.string.txtGroup)} $novaGroupInfo") }
 }
 
 fun Product.convertNutrientLevelList(): List<NutrientLevelItem> {
